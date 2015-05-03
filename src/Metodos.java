@@ -7,8 +7,10 @@
 
 //importamos todas las librerias a utilizar.
 import java.sql.*;
+import java.util.ArrayList;
 import javax.swing.*;
 import java.util.Calendar;
+import javax.swing.table.DefaultTableModel;
 
 public class Metodos {
 
@@ -64,6 +66,7 @@ public class Metodos {
             preparedStmt.execute();
             //Despues de hacer la consulta, cerramos entre java y la base de datos.
             miConexion.close();
+               JOptionPane.showMessageDialog(null, "Registrado Correctamente...", "Registro:", JOptionPane.INFORMATION_MESSAGE);
         } //Si hay un error en cualquier parte del try, nos mostrara cual es. En algun formato extraño...
         catch (Exception e) {
             System.err.println("Ocurrio un Error: " + e.getMessage());
@@ -93,28 +96,44 @@ public class Metodos {
         }
     }
     //Este Metodo Elimna por id, recuerda que modificandolo un poco, podrias hacerlo por nombre,
-    //apellido, emai, etc.
+    //apellido, email, etc.
+    void limpiaTabla(JTable tabla){
+        try{
+            DefaultTableModel temp = (DefaultTableModel) tabla.getModel();
+            int a =temp.getRowCount();
+            for(int i=0; i<a; i++)
+                temp.removeRow(0);
+        }catch(Exception e){
+            System.out.println(e);
+        }
+    }
+    
 
-    public void eliminar(int id) {
+    public void eliminar(JTable tabla){
         try {
             Connection miConexion = (Connection) Conector.GetConnection();
             //Lo que hace esta consulta es eliminar al usuario con el id = x que se encuentra 
             //en la tabla users.
+            
             String query = "delete from users where id = ?";
+            
             PreparedStatement preparedStmt = miConexion.prepareStatement(query);
-            preparedStmt.setInt(1, id);
-
+            int x = Integer.parseInt(tabla.getValueAt(tabla.getSelectedRow(),0)+"");
+            preparedStmt.setInt(1, x);
+            
             preparedStmt.execute();
-
+            
             miConexion.close();
+               JOptionPane.showMessageDialog(null, "Eliminado Correctamente...", "Registro:", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
-            System.err.println("No se pudo Eliminar: Error: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Seleccione un registro de la tabla", "Error:", JOptionPane.ERROR_MESSAGE);
         }
 
     }
 
-    public void mostrar() {
+    public void mostrar(JTable tabla) {
         try {
+            DefaultTableModel dtm;
             Connection miConexion = (Connection) Conector.GetConnection();
             //Seleccionamos todos los datos de la tabla users
             String query = "SELECT * FROM users";
@@ -125,29 +144,27 @@ public class Metodos {
             ResultSet rs = st.executeQuery(query);
 
             //Como ResultSet es un puntero anterior a la existencia de datos.
+            
+            ResultSetMetaData rsm = rs.getMetaData();
+            
+            //Creamos un ArrayList de objetos para luego mostrarlos.
+            ArrayList<Object[]> datos = new ArrayList<>();
             //Por eso se usa el metodo next() que lo hace avanzar a la posicion del primer dato :P
             //basicamente rs.next() seria algo como rs.siguiente();
             while (rs.next()) //Recorremos la cantidad de registros.
             {
-                //obtenemos el id... Recuerda que si eliminas un registro, el id, seguira avanzando, pero
-                //al momento de obtener los datos, no tendras ningun error, es decir que si eliminas el 
-                //registro 1 con todos sus datos, y agregar otro usuario, se registrara con id=2.
-                int id = rs.getInt("id");
-                //Obtenemos el nombre.
-                String firstName = rs.getString("first_name");
-                //Obtenemos el apellido.
-                String lastName = rs.getString("last_name");
-                //Obtenemos la fecha.
-                Date dateCreated = rs.getDate("date_created");
-                //Obtenemos un true/false si es admin o no.
-                boolean isAdmin = rs.getBoolean("is_admin");
-                //Obtenemos los puntos.
-                int numPoints = rs.getInt("num_points");
-
-                //Mostramos los resultados, le agregamos un salto de linea al final de cada registro.
-                System.out.format("%s, %s, %s, %s, %s, %s\n", id, firstName, lastName, dateCreated, isAdmin,
-                        numPoints);
+                Object[] filas = new Object[rsm.getColumnCount()];
+                for(int i=0;i< filas.length;i++){
+            //Como rs apunta a la posicion anterior a los datos, por eso le ponemos +1, para que comience en 1;
+                    filas[i] = rs.getObject(i+1);
+                }
+                datos.add(filas);
             }
+            dtm = (DefaultTableModel) tabla.getModel();
+            for(int i=0;i<datos.size();i++){
+            dtm.addRow(datos.get(i));
+            }
+            
         } catch (Exception ex) {
             System.out.println("Error: " + ex.toString());
         }
