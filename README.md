@@ -1,5 +1,5 @@
 # Java-MySQL-Interfaz
-Hola seguidores de <strong><a href="http://Programando.cf" target="_blank">Programando.cf</a></strong>, en esta ocasión les traigo la tercera parte del Tutorial de Java MySQL, pero ahora con interfaz gráfica. :P
+Hola seguidores de <strong><a href="http://Codificando.me" target="_blank">Codificando.me</a></strong>, en esta ocasión les traigo la tercera parte del Tutorial de Java MySQL, pero ahora con interfaz gráfica. :P
 
 Al final les dejare el Enlace de los Tutoriales anteriores y el proyecto adjunto.
 
@@ -53,8 +53,8 @@ Al final les dejare el Enlace de los Tutoriales anteriores y el proyecto adjunto
 
 <strong>Formulario: <a href="http://pastebin.com/mrDz7tQc" target="_blank">http://pastebin.com/mrDz7tQc</a></strong>
 
-<strong>Tutorial 1: <a href="http://programando.cf/wordpress/2015/04/crear-y-conectar-mysql-java/" target="_blank">http://programando.cf/wordpress/2015/04/crear-y-conectar-mysql-java/</a></strong>
+<strong>Tutorial 1: <a href="http://Codificando.me/2015/04/crear-y-conectar-mysql-java/" target="_blank">http://Codificando.me/2015/04/crear-y-conectar-mysql-java/</a></strong>
 
-<strong>Tutorial 2: <a href="http://programando.cf/wordpress/2015/04/insertar-modificar-eliminar-mostrar-mysql-java/" target="_blank">http://programando.cf/wordpress/2015/04/insertar-modificar-eliminar-mostrar-mysql-java/</a></strong>
+<strong>Tutorial 2: <a href="http://Codificando.me/2015/04/insertar-modificar-eliminar-mostrar-mysql-java/" target="_blank">http://Codificando.me/2015/04/insertar-modificar-eliminar-mostrar-mysql-java/</a></strong>
 
-<strong>Tutorial 3: <a href="http://programando.cf/wordpress/2015/05/mysql-interfaz-java/" target="_blank">http://programando.cf/wordpress/2015/05/mysql-interfaz-java/</a></strong>
+<strong>Tutorial 3: <a href="http://Codificando.me/2015/05/mysql-interfaz-java/" target="_blank">http://Codificando.me/2015/05/mysql-interfaz-java/</a></strong>
